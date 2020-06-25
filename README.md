@@ -8,7 +8,7 @@ IRMA architecture consists of related components:
 - [IRMA Keyshare Server](#irma-keyshare-server)
 - [IRMA Go Server](#irma-go-server)
 - [IRMA Scheme Manager](#irma-scheme-manager)
-- [IRMA JS (we are not working with this so far)](#irma-js)
+- [IRMA UI](#irma-ui)
 
 ## IRMA Mobile
 
@@ -48,12 +48,14 @@ to relevant parties. Anyone can start a new scheme, and consequently, become the
 
 The PbDF maintains its scheme called [“pbdf-schememanager”](https://github.com/privacybydesign/pbdf-schememanager), which the IRMA app uses by default.
 
-## IRMA JS
+## IRMA UI
 
-a.k.a. [irmajs](https://github.com/privacybydesign/irmajs)
+a.k.a. [irmajs](https://github.com/InternetNZ/irma-demo-ui)
 
 The irmajs component is essentially a JavaScript client that consumes the RESTful JSON API from the irmago component. 
 When interacting with either the issuer or verifier, the user browses to a website from that party. Then, the irmajs 
 component requests the session from the IRMA server. Subsequently, it generates the QR-code or deep-link to communicate 
 the session to the client and, consequently, the client can directly communicate with the IRMA server via the `/irma` 
 endpoint.
+
+The PbDF maintains its [irmajs](https://github.com/privacybydesign/irmajs) UI.
