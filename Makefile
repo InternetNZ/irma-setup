@@ -13,6 +13,9 @@ clean:       ## Remove all downloaded and compiled files
 clean-start:       ## Clean, setup then start.
 clean-start: clean setup start
 
+stop-all:
+	docker stop $(docker ps -q)
+
 scheme:
 	docker-compose -f docker-compose-scheme.yml up -d
 
