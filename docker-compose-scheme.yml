@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+
+  scheme:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.scheme.Dockerfile
+    volumes:
+      - ../inz-demo/:/var/www/html
+    networks:
+      internetnz:
+
+networks:
+  internetnz:

@@ -12,3 +12,12 @@ clean:       ## Remove all downloaded and compiled files
 
 clean-start:       ## Clean, setup then start.
 clean-start: clean setup start
+
+scheme:
+	docker-compose -f docker-compose-scheme.yml up -d
+
+scheme-rmi:
+	docker-compose -f docker-compose-scheme.yml down --rmi=local
+
+copy-scheme:
+	sh copy-scheme.sh
