@@ -46,7 +46,7 @@ a.k.a. [irma-demo-scheme](https://github.com/InternetNZ/inz-demo-scheme)
 The responsibility of the scheme manager is to maintain the information of one ore more IRMA schemes and distribute it 
 to relevant parties. Anyone can start a new scheme, and consequently, become the scheme manager for that scheme.
 
-The PbDF maintains its scheme called [“pbdf-schememanager”](https://github.com/privacybydesign/pbdf-schememanager), which the IRMA app uses by default.
+The PbDF maintains its scheme called ["pbdf-schememanager"](https://github.com/privacybydesign/pbdf-schememanager), which the IRMA app uses by default.
 
 ## IRMA UI
 
