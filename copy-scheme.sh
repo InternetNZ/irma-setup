@@ -1,4 +1,5 @@
 #!/bin/bash
+# Initial script to copy our custom scheme. Should be improved.
 set -x
 
 TMP_CFG=/tmp/irma_configuration

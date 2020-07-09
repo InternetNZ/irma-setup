@@ -1,3 +1,5 @@
-FROM nginx
+FROM nginx:latest
 
-EXPOSE 7000
+COPY . /usr/share/nginx/html
+
+EXPOSE 80
