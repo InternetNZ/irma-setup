@@ -9,17 +9,17 @@ declare -a compose_files=("-f docker-compose.yml");
 for i in "$@"
 do
 case $i in
-    -w=*|--with=*)
-    case ${i#*=} in
-      "scheme" )
-          compose_files=("${compose_files[@]}" "-f docker-compose-scheme.yml") ;;
-      "irmago" )
-          compose_files=("${compose_files[@]}" "-f docker-compose-irmago.yml") ;;
-    esac
-    shift
-    ;;
-    *)
-    ;;
+        -w=*|--with=*)
+        case ${i#*=} in
+                "scheme" )
+                        compose_files=("${compose_files[@]}" "-f docker-compose-scheme.yml") ;;
+                "irmago" )
+                        compose_files=("${compose_files[@]}" "-f docker-compose-irmago.yml") ;;
+        esac
+        shift
+        ;;
+        *)
+        ;;
 esac
 case $i in
     -b|--build)
@@ -46,6 +46,6 @@ fi
 CYAN='\033[0;36m'
 NC='\033[0m'
 
-printf "Executing ${CYAN} docker-compose ${compose_files[*]} ${docker_command} ${docker_detach} ${NC}";
+printf "Executing ${CYAN} docker-compose ${compose_files[*]} ${docker_command} ${docker_build} ${docker_detach} ${NC}";
 
-docker-compose ${compose_files[*]} ${docker_command} ${docker_detach};
+docker-compose ${compose_files[*]} ${docker_command} ${docker_build} ${docker_detach};

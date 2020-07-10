@@ -1,5 +1,16 @@
 ---
 version: '3.8'
 
+services:
+
+  irma:
+    build:
+      context: .
+      dockerfile: Dockerfile.irma.Dockerfile
+    volumes:
+      - ../inz-demo/src:/irma/inz-demo
+    networks:
+      internetnz:
+
 networks:
   internetnz:

@@ -5,10 +5,12 @@ services:
 
   irmago:
     build:
-      context: .
-      dockerfile: Dockerfile.irmago.Dockerfile
+      context: ../inz-demo/
+      dockerfile: ../irma-setup/Dockerfile.irmago.Dockerfile
     volumes:
-      - ../inz-demo/:/app/inz-demo
+      - ../inz-demo/src:/irma/inz-demo
+    ports:
+      - '8088'
     networks:
       internetnz:
 
