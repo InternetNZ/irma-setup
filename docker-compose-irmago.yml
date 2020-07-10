@@ -1,0 +1,16 @@
+---
+version: '3.8'
+
+services:
+
+  irmago:
+    build:
+      context: .
+      dockerfile: Dockerfile.irmago.Dockerfile
+    volumes:
+      - ../inz-demo/:/app/inz-demo
+    networks:
+      internetnz:
+
+networks:
+  internetnz:
