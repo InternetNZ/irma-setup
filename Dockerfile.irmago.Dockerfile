@@ -6,10 +6,12 @@ RUN git clone https://github.com/privacybydesign/irmago \
     && cd ../ \
     && rm -rf irmago
 
-WORKDIR /irma
+WORKDIR /irma/inz-demo
 
 COPY . .
 
-RUN irma server -u http://0.0.0.0:8088/ -vvvvv
+RUN irma server --no-tls -s /irma/inz-demo -u http://0.0.0.0:8088/ -vvvvv
 
 EXPOSE 8088
+
+#CMD ["irma server --no-tls -s /irma/inz-demo -u http://0.0.0.0:8088/ -vvvvv"]

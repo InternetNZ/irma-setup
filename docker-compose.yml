@@ -8,9 +8,22 @@ services:
       context: .
       dockerfile: Dockerfile.irma.Dockerfile
     volumes:
-      - ../inz-demo/src:/irma/inz-demo
+      - ../inz-demo/inz-demo:/irma/inz-demo
     networks:
       internetnz:
+
+  proxy:
+    image: jwilder/nginx-proxy
+    ports:
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./certs:/etc/nginx/certs:ro
+    networks:
+      internetnz:
+        aliases:
+          - irma-scheme.local.internetnz.nz
+          - localhost
 
 networks:
   internetnz:
