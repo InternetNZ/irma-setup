@@ -29,4 +29,5 @@ scheme-bash:
 	docker-compose -f docker-compose-scheme.yml run scheme bash
 
 irmago-bash:
-	docker-compose -f docker-compose-irmago.yml run irmago bash
+	docker-compose -f docker-compose.yml -f docker-compose-scheme.yml -f docker-compose-irmago.yml \
+		run -u $$UID:$$GID irmago bash
