@@ -14,7 +14,7 @@ clean-start:       ## Clean, setup then start.
 clean-start: clean setup start
 
 stop-all:
-	docker stop $(docker ps -q)
+	docker stop $$(docker ps -q)
 
 scheme-up:
 	docker-compose -f docker-compose-scheme.yml up -d
