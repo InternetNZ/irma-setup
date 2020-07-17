@@ -1,0 +1,16 @@
+---
+version: '3.8'
+
+services:
+
+  mobile:
+    build:
+      context: ../irma_mobile
+      dockerfile: ../irma-setup/Dockerfile.mobile.Dockerfile
+    volumes:
+      - ../inz-demo/inz-demo:/irma/irma_configuration/inz-demo
+    networks:
+      internetnz:
+
+networks:
+  internetnz:
