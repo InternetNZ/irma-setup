@@ -1,0 +1,18 @@
+---
+version: '3.8'
+
+services:
+
+  scheme:
+    build:
+      context: ../inz-demo/
+      dockerfile: ../irma-setup/Dockerfile.scheme.Dockerfile
+    volumes:
+      - ../inz-demo/:/usr/share/nginx/html
+    ports:
+      - '7000:80'
+    networks:
+      internetnz:
+
+networks:
+  internetnz:
