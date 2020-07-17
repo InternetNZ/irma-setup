@@ -14,9 +14,9 @@ clean-start:       ## Clean, setup then start.
 clean-start: clean setup start
 
 stop-all:
-	docker stop $(docker ps -q)
+	docker stop $$(docker ps -q)
 
-scheme:
+scheme-up:
 	docker-compose -f docker-compose-scheme.yml up -d
 
 scheme-rmi:
@@ -24,3 +24,10 @@ scheme-rmi:
 
 copy-scheme:
 	sh copy-scheme.sh
+
+scheme-bash:
+	docker-compose -f docker-compose-scheme.yml run scheme bash
+
+irmago-bash:
+	docker-compose -f docker-compose.yml -f docker-compose-scheme.yml -f docker-compose-irmago.yml \
+		run -u $$UID:$$GID irmago bash
