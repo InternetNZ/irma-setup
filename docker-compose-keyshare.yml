@@ -12,12 +12,12 @@ services:
 
   db:
     image: mysql
-    container_name: irma_keyshare_db
+    #container_name: irma_keyshare_db
     restart: always
     ports:
       - '3306:3306'
     volumes:
-      - ./src/main/resources/database.sql:/docker-entrypoint-initdb.d/dump.sql
+      - ../irma_keyshare_server/src/main/resources/database.sql:/docker-entrypoint-initdb.d/dump.sql
     environment:
       MYSQL_USER: irma
       MYSQL_PASSWORD: irma
