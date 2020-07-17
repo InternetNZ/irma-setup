@@ -59,3 +59,13 @@ the session to the client and, consequently, the client can directly communicate
 endpoint.
 
 The PbDF maintains its [irmajs](https://github.com/privacybydesign/irmajs) UI.
+
+## Utilities
+
+If you want to keep track of the IRMA communication when running on local, you can use mproxy to proxy all requests 
+in a way that can help you when sniffing the communications.
+
+```bash
+# can proxy keyshare server
+mitmproxy -p 18088 --mode reverse:http://localhost:8088/
+```

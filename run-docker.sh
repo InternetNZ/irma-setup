@@ -15,6 +15,8 @@ case $i in
                         compose_files=("${compose_files[@]}" "-f docker-compose-scheme.yml") ;;
                 "irmago" )
                         compose_files=("${compose_files[@]}" "-f docker-compose-irmago.yml") ;;
+                "keyshare" )
+                        compose_files=("${compose_files[@]}" "-f docker-compose-keyshare.yml") ;;
         esac
         shift
         ;;

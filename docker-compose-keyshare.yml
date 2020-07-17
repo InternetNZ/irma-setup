@@ -1,0 +1,49 @@
+---
+version: '3.8'
+
+services:
+
+  mail:
+    image: 'mailhog/mailhog:latest'
+    container_name: mailhog
+    ports:
+    - '1025:1025'
+    - '8025:8025'
+
+  db:
+    image: mysql
+    container_name: irma_keyshare_db
+    restart: always
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./src/main/resources/database.sql:/docker-entrypoint-initdb.d/dump.sql
+    environment:
+      MYSQL_USER: irma
+      MYSQL_PASSWORD: irma
+      MYSQL_ROOT_PASSWORD: irma
+      MYSQL_DATABASE: irma_keyshare
+
+  keyshare:
+    build:
+      context: ../irma_keyshare_server
+      dockerfile: ../irma-setup/Dockerfile.keyshare.Dockerfile
+    volumes:
+      - ../irma_keyshare_server/src:/irma_keyshare_server/src
+      - ../inz-demo/inz-demo:/irma_keyshare_server/src/main/resources/irma_configuration/inz-demo
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+    ports:
+      - '8080:8080'
+    links:
+      - db
+    depends_on:
+      - db
+    networks:
+      internetnz:
+        aliases:
+          - keyshare.local.internetnz.nz
+
+networks:
+  internetnz:
