@@ -24,20 +24,20 @@ case $i in
         ;;
 esac
 case $i in
-    -b|--build)
-    docker_build='--build'
-    shift
-    ;;
-    *)
-    ;;
+        -b|--build)
+        docker_build='--build'
+        shift
+        ;;
+        *)
+        ;;
 esac
 case $i in
-    -ndt|--no-detach)
-    docker_detach=''
-    shift
-    ;;
-    *)
-    ;;
+        -ndt|--no-detach)
+        docker_detach=''
+        shift
+        ;;
+        *)
+        ;;
 esac
 done
 

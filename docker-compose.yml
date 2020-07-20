@@ -23,6 +23,7 @@ services:
       internetnz:
         aliases:
           - irma-scheme.local.internetnz.nz
+          - irmago.local.internetnz.nz
           - localhost
 
 networks:
