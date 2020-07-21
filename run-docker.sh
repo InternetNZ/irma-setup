@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # create env file if not exists
-[ ! -f .env.vvvv ] && cp .env.sample .env.vvvv
+[ ! -f .env ] && cp .env.sample .env
 
 docker_build=''
 docker_detach='-d'

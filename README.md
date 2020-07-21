@@ -29,6 +29,8 @@ The keyshare server has multiple responsibilities. First, it can validate the PI
 KSS allows the session to continue. Second, it can block a user for a certain amount of time if the user enters the 
 PIN wrong too many times. Third, for users, it is also possible to block their account via the KSS website. 
 
+[More details](docs/keyshare.md)
+
 ## IRMA Go Server
 
 a.k.a. [irmago](https://github.com/privacybydesign/irmago)
@@ -38,6 +40,8 @@ and store credentials. Also, it provides the command-line tool `irma`, which amo
 instance. When running an IRMA server, two endpoints are exposed: `/irma`, that is used by the IRMA app during IRMA 
 sessions. And `/sessions`, that is used by requestors, enabling them to initiate a session, monitor them and retrieve 
 session results.
+
+[More details](docs/irmago.md)
 
 ## IRMA Scheme Manager
 
@@ -62,10 +66,14 @@ The PbDF maintains its [irmajs](https://github.com/privacybydesign/irmajs) UI.
 
 ## Utilities
 
+### mitmproxy
+
 If you want to keep track of the IRMA communication when running on local, you can use mproxy to proxy all requests 
 in a way that can help you when sniffing the communications.
 
 ```bash
 # can proxy keyshare server
 mitmproxy -p 18088 --mode reverse:http://localhost:8088/
+mitmproxy -p 18080 --mode reverse:http://localhost:8080/
 ```
+
