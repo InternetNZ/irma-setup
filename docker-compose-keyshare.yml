@@ -5,7 +5,6 @@ services:
 
   mail:
     image: 'mailhog/mailhog:latest'
-    #container_name: mailhog
     ports:
       - '1025:1025'
       - '8025:8025'
@@ -49,8 +48,8 @@ services:
       - mail
     depends_on:
       - db
-    extra_hosts:
-      - "irmago.local.internetnz.nz:192.168.0.10"
+    #extra_hosts:
+      #- "irmago.local.internetnz.nz:192.168.0.10"
     networks:
       internetnz:
         aliases:
