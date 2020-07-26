@@ -3,18 +3,10 @@ version: '3.8'
 
 services:
 
-  irma:
-    build:
-      context: .
-      dockerfile: Dockerfile.irma.Dockerfile
-    volumes:
-      - ../inz-demo/inz-demo:/irma/inz-demo
-    networks:
-      internetnz:
-
   proxy:
     image: jwilder/nginx-proxy
     ports:
+      - "80:80"
       - "443:443"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
@@ -23,7 +15,53 @@ services:
       internetnz:
         aliases:
           - irma-scheme.local.internetnz.nz
-          - localhost
+          - irmago.local.internetnz.nz
+
+  scheme:
+    build:
+      context: ../
+      dockerfile: ./irma-setup/Dockerfile.scheme.Dockerfile
+    volumes:
+      - ../inz-demo/inz-demo:/usr/share/nginx/html:ro
+    environment:
+      - VIRTUAL_HOST=irma-scheme.local.internetnz.nz
+      - VIRTUAL_PORT=80
+    networks:
+      internetnz:
+
+  irma-cli:
+    build:
+      context: .
+      dockerfile: Dockerfile.irma.Dockerfile
+    volumes:
+      - ../inz-demo/inz-demo:/irma/inz-demo
+    networks:
+      internetnz:
+
+  irmago:
+    build:
+      context: ../
+      dockerfile: ./irma-setup/Dockerfile.irmago.Dockerfile
+    command: ["wait-for-it", "irma-scheme.local.internetnz.nz:80", "--", "irma", "server"]
+    volumes:
+      - ./certs:/etc/ssl/certs:cached
+      - ./build/irmago/jwtkeys:/irma/jwtkeys:cached
+      - ../inz-demo/inz-demo:/irma/schemes/inz-demo:cached
+    environment:
+      - VIRTUAL_HOST=irmago.local.internetnz.nz
+      - VIRTUAL_PORT=8088
+    env_file:
+      - .env.sample
+      - .env
+    ports:
+      - '8088:8088'
+    depends_on:
+      - scheme
+      - proxy
+    networks:
+      internetnz:
+        aliases:
+          - irmago.local.internetnz.nz
 
 networks:
   internetnz:

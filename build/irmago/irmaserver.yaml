@@ -1,7 +1,0 @@
----
-# https://irma.app/docs/irma-server/#configuring
-# https://irma.app/docs/irma-server/#configuration-files
-production: false
-schemes_path: /irma/inz-demo
-no_tls: true
-no_auth: false

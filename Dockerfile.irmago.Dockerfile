@@ -6,12 +6,14 @@ RUN git clone https://github.com/privacybydesign/irmago \
     && cd ../ \
     && rm -rf irmago
 
-WORKDIR /irma/inz-demo
+# context: ../
+COPY ./irma-setup/wait-for-it.sh /usr/local/bin/wait-for-it
+COPY ./irma-setup/build/irmago/jwtkeys/ /irma/jwtkeys
 
-COPY . .
+WORKDIR /irma/schemes/inz-demo
 
-#RUN irma server --no-tls -s /irma/inz-demo -u http://0.0.0.0:8088/ -vv
+COPY ./inz-demo/inz-demo/ /irma/schemes/inz-demo
+COPY ./inz-demo/inz-demo/ /root/.local/share/irma/irma_configuration/inz-demo
 
 EXPOSE 8088
 
-CMD ["irma server --no-tls -s /irma/inz-demo -u http://0.0.0.0:8088/ -vv"]

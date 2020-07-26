@@ -5,10 +5,11 @@ services:
 
   mail:
     image: 'mailhog/mailhog:latest'
-    container_name: mailhog
     ports:
-    - '1025:1025'
-    - '8025:8025'
+      - '1025:1025'
+      - '8025:8025'
+    networks:
+      internetnz:
 
   db:
     image: mysql
@@ -26,12 +27,11 @@ services:
       internetnz:
         aliases:
           - db.local.internetnz.nz
-          - mysql.local.internetnz.nz
 
   keyshare:
     build:
-      context: ../irma_keyshare_server
-      dockerfile: ../irma-setup/Dockerfile.keyshare.Dockerfile
+      context: ../
+      dockerfile: ./irma-setup/Dockerfile.keyshare.Dockerfile
     volumes:
       - ../irma_keyshare_server/src:/irma_keyshare_server/src
       - ../inz-demo/inz-demo:/irma_keyshare_server/src/main/resources/irma_configuration/inz-demo
@@ -43,6 +43,9 @@ services:
       - '8443:8443'
     links:
       - db
+      - irmago
+      - mail
+      - proxy
     depends_on:
       - db
     networks:

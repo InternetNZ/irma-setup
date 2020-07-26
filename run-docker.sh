@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# create env file if not exists
+[ ! -f .env ] && cp .env.sample .env
+
 docker_build=''
 docker_detach='-d'
 
@@ -11,10 +14,10 @@ do
 case $i in
         -w=*|--with=*)
         case ${i#*=} in
-                "scheme" )
-                        compose_files=("${compose_files[@]}" "-f docker-compose-scheme.yml") ;;
-                "irmago" )
-                        compose_files=("${compose_files[@]}" "-f docker-compose-irmago.yml") ;;
+#                "scheme" )
+#                        compose_files=("${compose_files[@]}" "-f docker-compose-scheme.yml") ;;
+#                "irmago" )
+#                        compose_files=("${compose_files[@]}" "-f docker-compose-irmago.yml") ;;
                 "keyshare" )
                         compose_files=("${compose_files[@]}" "-f docker-compose-keyshare.yml") ;;
         esac
@@ -24,20 +27,20 @@ case $i in
         ;;
 esac
 case $i in
-    -b|--build)
-    docker_build='--build'
-    shift
-    ;;
-    *)
-    ;;
+        -b|--build)
+        docker_build='--build'
+        shift
+        ;;
+        *)
+        ;;
 esac
 case $i in
-    -ndt|--no-detach)
-    docker_detach=''
-    shift
-    ;;
-    *)
-    ;;
+        -ndt|--no-detach)
+        docker_detach=''
+        shift
+        ;;
+        *)
+        ;;
 esac
 done
 
