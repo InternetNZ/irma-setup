@@ -77,3 +77,13 @@ mitmproxy -p 18088 --mode reverse:http://localhost:8088/
 mitmproxy -p 18080 --mode reverse:http://localhost:8080/
 ```
 
+## mkcert for local development
+
+We run an nginx proxy for https and local development. If you don't have valid certificates, you 
+won't be able to use the application. Fortunately, creating valid certificates is easy!
+
+* Install [mkcert](https://github.com/FiloSottile/mkcert)
+* `mkcert -install`
+* `mkdir -p ./certs`
+* `mkcert -cert-file ./certs/local.internetnz.nz.crt -key-file ./certs/local.internetnz.nz.key local.internetnz.nz "*.local.internetnz.nz" localhost 127.0.0.1 ::1`
+
