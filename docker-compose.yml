@@ -17,14 +17,14 @@ services:
         aliases:
           - irma-scheme.local.internetnz.nz
           - irma-demoui.local.internetnz.nz
-          #- irmago.local.internetnz.nz
+          - irmago.local.internetnz.nz
 
   scheme:
     build:
-      context: ../
-      dockerfile: ./irma-setup/Dockerfile.scheme.Dockerfile
+      context: ../inz-demo/
+      dockerfile: ../irma-setup/Dockerfile.scheme.Dockerfile
     volumes:
-      - ../inz-demo/inz-demo:/usr/share/nginx/html:ro
+      - ./inz-demo:/usr/share/nginx/html:ro
     environment:
       - VIRTUAL_HOST=irma-scheme.local.internetnz.nz
       - VIRTUAL_PORT=80

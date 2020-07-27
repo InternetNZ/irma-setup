@@ -21,7 +21,7 @@ To generate, use private key under `/path/keyshare/src/main/resources/sk.der` an
 `build/irmago/jwtkeys/pk.pem`.
 
 ```bash
-cd build/irmago/jwtkeys/pk.pem
+cd build/irmago/jwtkeys/
 openssl rsa -inform DER -pubout -outform PEM -in /path/keyshare/src/main/resources/sk.der -out pk.pem
 ``` 
 
