@@ -12,10 +12,12 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - ./certs:/etc/nginx/certs:ro
     networks:
-      internetnz:
+      frontend-internetnz:
+      backend-internetnz:
         aliases:
           - irma-scheme.local.internetnz.nz
-          - irmago.local.internetnz.nz
+          - irma-demoui.local.internetnz.nz
+          #- irmago.local.internetnz.nz
 
   scheme:
     build:
@@ -27,7 +29,7 @@ services:
       - VIRTUAL_HOST=irma-scheme.local.internetnz.nz
       - VIRTUAL_PORT=80
     networks:
-      internetnz:
+      frontend-internetnz:
 
   irma-cli:
     build:
@@ -36,7 +38,7 @@ services:
     volumes:
       - ../inz-demo/inz-demo:/irma/inz-demo
     networks:
-      internetnz:
+      backend-internetnz:
 
   irmago:
     build:
@@ -59,9 +61,10 @@ services:
       - scheme
       - proxy
     networks:
-      internetnz:
+      backend-internetnz:
         aliases:
           - irmago.local.internetnz.nz
 
 networks:
-  internetnz:
+  backend-internetnz:
+  frontend-internetnz:

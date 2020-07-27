@@ -23,7 +23,7 @@ To run IRMA Mobile on local environment, you may follow the project README. Some
 - If your JDK is not jdk-8, you should:
   - set JAVA_HOME to jdk8 (ex: `export JAVA_HOME=/usr/lib/jvm/jdk-1.8.0-openjdk`)
   - add jdk8 to PATH (ex: `export PATH=$JAVA_HOME/bin:$PATH`)
-- Project runs with node version 12
+- Project runs with node version 12 (until 12.18.2)
 - After running install, you need to be sure that client is running through `yarn start`
 - You must have your simulator (or your development connect phone) already up and running before 
 executing `yarn run android` (or `yarn run ios`) as this will connect to your simulator

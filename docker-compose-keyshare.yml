@@ -9,7 +9,7 @@ services:
       - '1025:1025'
       - '8025:8025'
     networks:
-      internetnz:
+      backend-internetnz:
 
   db:
     image: mysql
@@ -24,7 +24,7 @@ services:
       MYSQL_ROOT_PASSWORD: irma
       MYSQL_DATABASE: irma_keyshare
     networks:
-      internetnz:
+      backend-internetnz:
         aliases:
           - db.local.internetnz.nz
 
@@ -41,17 +41,12 @@ services:
     ports:
       - '8080:8080'
       - '8443:8443'
-    links:
-      - db
-      - irmago
-      - mail
-      - proxy
     depends_on:
       - db
     networks:
-      internetnz:
+      backend-internetnz:
         aliases:
           - keyshare.local.internetnz.nz
 
 networks:
-  internetnz:
+  backend-internetnz:

@@ -14,8 +14,8 @@ do
 case $i in
         -w=*|--with=*)
         case ${i#*=} in
-#                "scheme" )
-#                        compose_files=("${compose_files[@]}" "-f docker-compose-scheme.yml") ;;
+                "demoui" )
+                        compose_files=("${compose_files[@]}" "-f docker-compose-demoui.yml") ;;
 #                "irmago" )
 #                        compose_files=("${compose_files[@]}" "-f docker-compose-irmago.yml") ;;
                 "keyshare" )
