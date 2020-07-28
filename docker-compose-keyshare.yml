@@ -14,8 +14,8 @@ services:
   db:
     image: mysql
     restart: always
-    ports:
-      - '3306:3306'
+    #ports:
+    #  - '3306:3306'
     volumes:
       - ../irma_keyshare_server/src/main/resources/database.sql:/docker-entrypoint-initdb.d/dump.sql
     environment:
