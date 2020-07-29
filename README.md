@@ -10,6 +10,10 @@ IRMA architecture consists of related components:
 - [IRMA Scheme Manager](#irma-scheme-manager)
 - [IRMA UI](#irma-ui)
 
+Check [running on docker](docs/running-on-docker.md) to prepare your environment.
+
+TL;DR: `./run-docker.sh`
+
 ## IRMA Mobile
 
 a.k.a.: [irma_mobile](https://github.com/InternetNZ/irma_mobile)
@@ -63,27 +67,3 @@ the session to the client and, consequently, the client can directly communicate
 endpoint.
 
 The PbDF maintains its [irmajs](https://github.com/privacybydesign/irmajs) UI.
-
-## Utilities
-
-### mitmproxy
-
-If you want to keep track of the IRMA communication when running on local, you can use mproxy to proxy all requests 
-in a way that can help you when sniffing the communications.
-
-```bash
-# can proxy keyshare server
-mitmproxy -p 18088 --mode reverse:http://localhost:8088/
-mitmproxy -p 18080 --mode reverse:http://localhost:8080/
-```
-
-## mkcert for local development
-
-We run an nginx proxy for https and local development. If you don't have valid certificates, you 
-won't be able to use the application. Fortunately, creating valid certificates is easy!
-
-* Install [mkcert](https://github.com/FiloSottile/mkcert)
-* `mkcert -install`
-* `mkdir -p ./certs`
-* `mkcert -cert-file ./certs/local.internetnz.nz.crt -key-file ./certs/local.internetnz.nz.key local.internetnz.nz "*.local.internetnz.nz" localhost 127.0.0.1 ::1`
-
