@@ -45,7 +45,7 @@ won't be able to use the application. Fortunately, creating valid certificates i
 Then add all used hosts to your hosts file:
 
 ```
-127.0.0.1 keyshare.local.internetnz.nz
+127.0.0.1 irma-keyshare.local.internetnz.nz
 127.0.0.1 irma.local.internetnz.nz
 127.0.0.1 irmago.local.internetnz.nz
 127.0.0.1 irma-scheme.local.internetnz.nz
