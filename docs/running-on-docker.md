@@ -34,7 +34,7 @@ Observe that inz-demo-scheme was renamed to inz-demo. You need to rename on your
 
 ## mkcert for local development
 
-We run an nginx proxy for https and local development. If you don't have valid certificates, you 
+We run a nginx proxy for https and local development. If you don't have valid certificates, you 
 won't be able to use the application. Fortunately, creating valid certificates is easy!
 
 * Install [mkcert](https://github.com/FiloSottile/mkcert)
@@ -42,9 +42,19 @@ won't be able to use the application. Fortunately, creating valid certificates i
 * `mkdir -p ./certs`
 * `mkcert -cert-file ./certs/local.internetnz.nz.crt -key-file ./certs/local.internetnz.nz.key local.internetnz.nz "*.local.internetnz.nz" localhost 127.0.0.1 ::1`
 
+Then add all used hosts to your hosts file:
+
+```
+127.0.0.1 keyshare.local.internetnz.nz
+127.0.0.1 irma.local.internetnz.nz
+127.0.0.1 irmago.local.internetnz.nz
+127.0.0.1 irma-scheme.local.internetnz.nz
+127.0.0.1 irma-demoui.local.internetnz.nz
+```
+
 ## Configs and scheme sign
 
-We still need to to some tiny manual configs. Please check:
+We still need to do some tiny manual configs. Please check:
 
 1. Some config files still need to have the actual IP of hosting machine. We need to change:
 
