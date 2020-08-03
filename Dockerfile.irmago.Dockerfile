@@ -13,7 +13,7 @@ COPY ./irma-setup/build/irmago/jwtkeys/ /irma/jwtkeys
 WORKDIR /irma/schemes/inz-demo
 
 COPY ./inz-demo/inz-demo/ /irma/schemes/inz-demo
-COPY ./inz-demo/inz-demo/ /root/.local/share/irma/irma_configuration/inz-demo
+#COPY ./inz-demo/inz-demo/ /root/.local/share/irma/irma_configuration/inz-demo
 
 EXPOSE 8088
 
