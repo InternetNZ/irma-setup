@@ -13,11 +13,9 @@ services:
       - ./certs:/etc/nginx/certs:ro
     networks:
       frontend-internetnz:
-      backend-internetnz:
         aliases:
-          - irma-scheme.local.internetnz.nz
           - irma-demoui.local.internetnz.nz
-          - irmago.local.internetnz.nz
+      backend-internetnz:
 
   scheme:
     build:

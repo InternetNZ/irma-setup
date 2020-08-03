@@ -43,10 +43,13 @@ services:
       - '8443:8443'
     depends_on:
       - db
+    environment:
+      - VIRTUAL_HOST=irma-keyshare.local.internetnz.nz
+      - VIRTUAL_PORT=8080
     networks:
       backend-internetnz:
         aliases:
-          - keyshare.local.internetnz.nz
+          - irma-keyshare.local.internetnz.nz
 
 networks:
   backend-internetnz:
