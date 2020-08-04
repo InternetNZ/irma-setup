@@ -29,14 +29,15 @@ services:
     networks:
       frontend-internetnz:
 
-  irma-cli:
-    build:
-      context: .
-      dockerfile: Dockerfile.irma.Dockerfile
-    volumes:
-      - ../inz-demo/inz-demo:/irma/inz-demo
-    networks:
-      backend-internetnz:
+# TODO: May be retired
+#  irma-cli:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile.irma.Dockerfile
+#    volumes:
+#      - ../inz-demo/inz-demo:/irma/inz-demo
+#    networks:
+#      backend-internetnz:
 
   irmago:
     build:
