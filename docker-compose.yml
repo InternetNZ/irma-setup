@@ -44,7 +44,6 @@ services:
       dockerfile: ./irma-setup/Dockerfile.irmago.Dockerfile
     command: ["wait-for-it", "irma-scheme.local.internetnz.nz:80", "--", "irma", "server"]
     volumes:
-      #- ./certs:/etc/ssl/certs:cached
       - ./build/irmago/jwtkeys:/irma/jwtkeys:cached
       - ../inz-demo/inz-demo:/irma/schemes/inz-demo:cached
     environment:
