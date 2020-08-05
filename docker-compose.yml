@@ -1,5 +1,5 @@
 ---
-version: '3.8'
+version: '3.7'
 
 services:
 
@@ -29,14 +29,15 @@ services:
     networks:
       frontend-internetnz:
 
-  irma-cli:
-    build:
-      context: .
-      dockerfile: Dockerfile.irma.Dockerfile
-    volumes:
-      - ../inz-demo/inz-demo:/irma/inz-demo
-    networks:
-      backend-internetnz:
+# TODO: May be retired
+#  irma-cli:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile.irma.Dockerfile
+#    volumes:
+#      - ../inz-demo/inz-demo:/irma/inz-demo
+#    networks:
+#      backend-internetnz:
 
   irmago:
     build:
@@ -44,7 +45,6 @@ services:
       dockerfile: ./irma-setup/Dockerfile.irmago.Dockerfile
     command: ["wait-for-it", "irma-scheme.local.internetnz.nz:80", "--", "irma", "server"]
     volumes:
-      - ./certs:/etc/ssl/certs:cached
       - ./build/irmago/jwtkeys:/irma/jwtkeys:cached
       - ../inz-demo/inz-demo:/irma/schemes/inz-demo:cached
     environment:
