@@ -35,6 +35,7 @@ services:
     volumes:
       - ./build/irmago/jwtkeys:/irma/jwtkeys:cached
       - ../inz-demo/inz-demo:/irma/schemes/inz-demo:cached
+      - ./certs:/etc/ssl/certs
     environment:
       - VIRTUAL_HOST=irmago.local.internetnz.nz
       - VIRTUAL_PORT=8088
@@ -43,6 +44,8 @@ services:
       - .env
     ports:
       - '8088:8088'
+    extra_hosts:
+      - irma-scheme.local.internetnz.nz:192.168.0.10
     depends_on:
       - scheme
       - proxy
