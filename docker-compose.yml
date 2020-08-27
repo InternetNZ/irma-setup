@@ -44,8 +44,6 @@ services:
       - .env
     ports:
       - '8088:8088'
-    extra_hosts:
-      - irma-scheme.local.internetnz.nz:192.168.0.10
     depends_on:
       - scheme
       - proxy
