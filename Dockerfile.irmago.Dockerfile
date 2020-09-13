@@ -1,4 +1,6 @@
-FROM golang:1.14 as irmago
+FROM golang:1.14-alpine as irmago
+
+RUN apk add --no-cache bash git
 
 RUN git clone https://github.com/privacybydesign/irmago \
     && cd irmago \
