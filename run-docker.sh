@@ -49,6 +49,6 @@ fi
 CYAN='\033[0;36m'
 NC='\033[0m'
 
-printf "Executing ${CYAN} docker-compose ${compose_files[*]} ${docker_command} ${docker_build} ${docker_detach} ${NC}";
+printf "Executing ${CYAN} docker-compose ${compose_files[*]} ${docker_command} ${docker_build} --remove-orphans ${docker_detach} ${NC}";
 
 docker-compose ${compose_files[*]} ${docker_command} ${docker_build} ${docker_detach};
