@@ -50,8 +50,15 @@ services:
     environment:
       - VIRTUAL_HOST=irmago.local.internetnz.nz
       - VIRTUAL_PORT=8088
+      #- IRMASERVER_NO_TLS=true
+      #- IRMASERVER_SCHEMES_PATH=/irma/schemes
+      #- IRMASERVER_URL=http://13.54.7.159:8088
+      #- IRMASERVER_NO_AUTH=false
+      #- IRMASERVER_REQUESTORS={"keyshare_server":{"auth_method":"publickey","key_file":"/irma/jwtkeys/pk.pem"},"site":{"auth_method":"publickey","key_file":"/irma/jwtkeys/pk.pem"}}
+      #- IRMASERVER_REQUESTORS='{}'
+      #- IRMASERVER_VERBOSE=2
     env_file:
-      - .env.sample
+      # - .env.sample
       - .env
     ports:
       - '8088:8088'
