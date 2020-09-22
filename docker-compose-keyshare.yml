@@ -14,8 +14,6 @@ services:
   db:
     image: mysql
     restart: always
-    #ports:
-    #  - '3306:3306'
     volumes:
       - ../irma_keyshare_server/src/main/resources/database.sql:/docker-entrypoint-initdb.d/dump.sql
     environment:
@@ -33,8 +31,8 @@ services:
       context: ../
       dockerfile: ./irma-setup/Dockerfile.keyshare.Dockerfile
     volumes:
-      - ../irma_keyshare_server/src:/irma_keyshare_server/src
-      - ../inz-demo/inz-demo:/irma_keyshare_server/src/main/resources/irma_configuration/inz-demo
+      - ../irma_keyshare_server/src:/app/src
+      - ../inz-demo/inz-demo:/app/src/main/resources/irma_configuration/inz-demo
     stdin_open: true
     tty: true
     restart: unless-stopped
