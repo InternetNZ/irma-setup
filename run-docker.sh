@@ -9,38 +9,38 @@ docker_detach='-d'
 docker_command='up';
 declare -a compose_files=("-f docker-compose.yml");
 
-for i in "$@"
-do
-case $i in
-        -w=*|--with=*)
-        case ${i#*=} in
-                "demoui" )
-                        compose_files=("${compose_files[@]}" "-f docker-compose-demoui.yml") ;;
-                "keyshare" )
-                        compose_files=("${compose_files[@]}" "-f docker-compose-keyshare.yml") ;;
-        esac
-        shift
-        ;;
-        *)
-        ;;
-esac
-case $i in
-        -b|--build)
-        docker_build='--build'
-        shift
-        ;;
-        *)
-        ;;
-esac
-case $i in
-        -ndt|--no-detach)
-        docker_detach=''
-        shift
-        ;;
-        *)
-        ;;
-esac
-done
+#for i in "$@"
+#do
+#case $i in
+#        -w=*|--with=*)
+#        case ${i#*=} in
+#                "demoui" )
+#                        compose_files=("${compose_files[@]}" "-f docker-compose-demoui.yml") ;;
+#                "keyshare" )
+#                        compose_files=("${compose_files[@]}" "-f docker-compose-keyshare.yml") ;;
+#        esac
+#        shift
+#        ;;
+#        *)
+#        ;;
+#esac
+#case $i in
+#        -b|--build)
+#        docker_build='--build'
+#        shift
+#        ;;
+#        *)
+#        ;;
+#esac
+#case $i in
+#        -ndt|--no-detach)
+#        docker_detach=''
+#        shift
+#        ;;
+#        *)
+#        ;;
+#esac
+#done
 
 if [[ -n $1 ]]; then
     docker_command=$@
