@@ -26,12 +26,14 @@ services:
       - VIRTUAL_PORT=80
     networks:
       frontend-internetnz:
+        aliases:
+          - irma-scheme.local.internetnz.nz
 
   irmago:
     build:
       context: ../
       dockerfile: ./irma-setup/Dockerfile.irmago.Dockerfile
-    command: ["wait-for-it", "${WAIT_SITE_URL:-www.google.com:80}", "-s", "-t", "0", "--", "irma", "server"]
+    command: ["wait-for-it", "${SCHEME_SITE_WAIT_URL:-scheme:80}", "-s", "-t", "0", "--", "irma", "server"]
     volumes:
       - ./build/irmago/jwtkeys:/irma/jwtkeys:cached
       - ../inz-demo/inz-demo:/irma/schemes/inz-demo:cached
@@ -51,6 +53,7 @@ services:
       - scheme
       - proxy
     networks:
+      frontend-internetnz:
       backend-internetnz:
         aliases:
           - irmago.local.internetnz.nz
