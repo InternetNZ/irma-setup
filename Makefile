@@ -9,7 +9,8 @@ stop-all:
 
 up-all:
 	docker-compose -f docker-compose.yml up --remove-orphans -d
-
+up-all-build:
+         docker-compose -f docker-compose.yml up --remove-orphans -d --build
 up-all-nd:
 	docker-compose -f docker-compose.yml up --remove-orphans
 
