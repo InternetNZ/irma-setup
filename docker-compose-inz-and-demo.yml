@@ -1,0 +1,125 @@
+---
+version: '3.7'
+
+services:
+
+  proxy:
+    image: jwilder/nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./certs:/etc/nginx/certs:ro
+    networks:
+      frontend-internetnz:
+      backend-internetnz:
+
+  scheme:
+    build:
+      context: ../inz-demo/
+      dockerfile: ../irma-setup/Dockerfile.scheme.Dockerfile
+    volumes:
+      - ../inz-demo/inz-demo:/usr/share/nginx/html:ro
+    environment:
+      - VIRTUAL_HOST=irma-scheme.local.internetnz.nz
+      - VIRTUAL_PORT=80
+    networks:
+      frontend-internetnz:
+        aliases:
+          - irma-scheme.local.internetnz.nz
+
+  irmago:
+    build:
+      context: ../
+      dockerfile: ./irma-setup/Dockerfile.irmago.inz-and-demo.Dockerfile
+    command: ["wait-for-it", "${SCHEME_SITE_WAIT_URL:-scheme:80}", "-s", "-t", "0", "--", "irma", "server"]
+    volumes:
+      - ./build/irmago/jwtkeys:/irma/jwtkeys:cached
+      - ../inz-demo/inz-demo:/irma/schemes/inz-demo:cached
+    environment:
+      - SCHEME_SITE_URL=${SCHEME_SITE_URL:-https://demo.irma.nz/inz-demo}
+      - VIRTUAL_HOST=${IRMASERVER_VIRTUAL_HOST:-irmago.local.internetnz.nz}
+      - VIRTUAL_PORT=${IRMASERVER_VIRTUAL_PORT:-8088}
+      - IRMASERVER_NO_TLS=${IRMASERVER_NO_TLS:-true}
+      - IRMASERVER_SCHEMES_PATH=${IRMASERVER_SCHEMES_PATH:-/irma/schemes}
+      - IRMASERVER_URL=${IRMASERVER_URL:-http://go.demo.irma.nz}
+      - IRMASERVER_NO_AUTH=${IRMASERVER_NO_AUTH:-false}
+      - IRMASERVER_REQUESTORS=${IRMASERVER_REQUESTORS:-false}
+      - IRMASERVER_VERBOSE=${IRMASERVER_VERBOSE:-0}
+    ports:
+      - '8088:8088'
+    depends_on:
+      - scheme
+      - proxy
+    networks:
+      frontend-internetnz:
+      backend-internetnz:
+        aliases:
+          - irmago.local.internetnz.nz
+
+  mail:
+    image: 'mailhog/mailhog:latest'
+    ports:
+      - '1025:1025'
+      - '8025:8025'
+    networks:
+      backend-internetnz:
+
+  db:
+    image: mysql
+    restart: always
+    volumes:
+      - ../irma_keyshare_server/src/main/resources/database.sql:/docker-entrypoint-initdb.d/dump.sql
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_USER: irma
+      MYSQL_PASSWORD: irma
+      MYSQL_ROOT_PASSWORD: irma
+      MYSQL_DATABASE: irma_keyshare
+    networks:
+      backend-internetnz:
+        aliases:
+          - db.local.internetnz.nz
+
+  keyshare:
+    build:
+      context: ../
+      dockerfile: ./irma-setup/Dockerfile.keyshare.inz-and-demo.Dockerfile
+    volumes:
+      - ../irma_keyshare_server/src:/app/src
+      - ../inz-demo/inz-demo:/app/src/main/resources/irma_configuration/inz-demo
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+    ports:
+      - '8080:8080'
+      - '8443:8443'
+    depends_on:
+      - db
+    environment:
+      - VIRTUAL_HOST=irma-keyshare.local.internetnz.nz
+      - VIRTUAL_PORT=${KEYSHARE_VIRTUAL_PORT:-8080}
+    networks:
+      backend-internetnz:
+        aliases:
+          - irma-keyshare.local.internetnz.nz
+
+  demoui:
+    build:
+      context: ../irma-demo-ui
+      dockerfile: ../irma-setup/Dockerfile.demoui.Dockerfile
+    volumes:
+      - ../irma-demo-ui/:/usr/share/nginx/html
+    environment:
+      - VIRTUAL_HOST=irma-demoui.local.internetnz.nz
+      - VIRTUAL_PORT=80
+    networks:
+      frontend-internetnz:
+        aliases:
+          - irma-demoui.local.internetnz.nz
+
+networks:
+  backend-internetnz:
+  frontend-internetnz:
