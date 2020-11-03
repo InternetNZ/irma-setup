@@ -11,7 +11,8 @@ up-all:
 	docker-compose -f docker-compose.yml up --remove-orphans -d
 
 up-all-build:
-         docker-compose -f docker-compose.yml up --remove-orphans -d --build
+         docker-compose -f docker-compose.yml up --build --remove-orphans -d
+         
 up-all-nd:
 	docker-compose -f docker-compose.yml up --remove-orphans
 
