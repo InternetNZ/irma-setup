@@ -16,9 +16,6 @@ up-build:
 up-nd:
 	docker-compose -f docker-compose.yml up --remove-orphans
 
-up-inz-and-demo-nd:
-	docker-compose -f docker-compose-inz-and-demo.yml up --remove-orphans
-
 irmago-bash:
 	docker-compose -f docker-compose.yml run -u $$UID:$$GID --rm irmago bash
 

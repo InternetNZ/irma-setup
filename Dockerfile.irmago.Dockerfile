@@ -15,6 +15,7 @@ COPY irma-setup/build/irmago/jwtkeys/ /irma/jwtkeys
 WORKDIR /irma/schemes/inz-demo
 
 COPY inz-demo/inz-demo/ /irma/schemes/inz-demo
+RUN git clone https://github.com/privacybydesign/irma-demo-schememanager /irma/schemes/irma-demo
 
 EXPOSE 8088
 
