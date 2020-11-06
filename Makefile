@@ -7,13 +7,13 @@ clean-start: stop-all up-all
 stop-all:
 	docker stop $$(docker ps -q)
 
-up-all:
+up:
 	docker-compose -f docker-compose.yml up --remove-orphans -d
 
-up-all-build:
-         docker-compose -f docker-compose.yml up --build --remove-orphans -d
+up-build:
+	docker-compose -f docker-compose.yml up --build --remove-orphans -d
          
-up-all-nd:
+up-nd:
 	docker-compose -f docker-compose.yml up --remove-orphans
 
 irmago-bash:
