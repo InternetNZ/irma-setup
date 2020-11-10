@@ -46,6 +46,8 @@ services:
       - IRMASERVER_NO_AUTH=${IRMASERVER_NO_AUTH:-false}
       - IRMASERVER_PRODUCTION=${IRMASERVER_PRODUCTION:-false}
       - IRMASERVER_REQUESTORS=${IRMASERVER_REQUESTORS:-false}
+      # workaround for production -- under investigation
+      #- IRMASERVER_REQUESTORS={"fake":{"auth_method":"token","key":"secret-fake-token","disclose_perms":["*"],"issue_perms":["*"],"sign_perms":["*"]},"keyshare_server":{"auth_method":"publickey","key_file":"/irma/jwtkeys/pk.pem"},"site":{"auth_method":"publickey","key_file":"/irma/jwtkeys/pk.pem"}}
       - IRMASERVER_SCHEMES_PATH=${IRMASERVER_SCHEMES_PATH:-/irma/schemes}
       - IRMASERVER_URL=${IRMASERVER_URL:-http://go.demo.irma.nz}
       - IRMASERVER_VERBOSE=${IRMASERVER_VERBOSE:-0}
