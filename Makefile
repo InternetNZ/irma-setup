@@ -37,3 +37,6 @@ rmi-all:
 # `export IMAGE_REPOSITORY=internetnzhub/demoui` | `export IMAGE_TAG=0.1.0`
 build-demoui:
 	docker build -f Dockerfile.demoui.Dockerfile ../irma-demo-ui/ -t $$IMAGE_REPOSITORY:$$IMAGE_TAG
+
+build-irmago:
+	docker build -f Dockerfile.irmago.Dockerfile ../ -t $$IRMAGO_IMAGE_REPOSITORY:$$IRMAGO_IMAGE_TAG
