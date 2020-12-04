@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-configmap
+data:
+  APP_ID: "irma-demo-ui-v1-{{ .Release.Name }}"
+  OPENAPI_SPEC: "/api/v1/spec"
+  OPENAPI_ENABLE_RESPONSE_VALIDATION: "false"
+  PORT: "80"
+  LOG_LEVEL: "info"
