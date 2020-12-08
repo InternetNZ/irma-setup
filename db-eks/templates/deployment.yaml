@@ -40,6 +40,8 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
+            - mountPath: "/docker-entrypoint-initdb.d"
+              name: mysql-initdb
             - mountPath: "/var/lib/mysql"
               subPath: "mysql"
               name: mysql-data
@@ -56,6 +58,9 @@ spec:
         - name: mysql-data
           persistentVolumeClaim:
             claimName: mysql-data-disk
+        - name: mysql-initdb
+          configMap:
+            name: {{ .Release.Name }}-db-init-configmap
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
