@@ -15,4 +15,4 @@ COPY irma_keyshare_server/src /irma_keyshare_server/src
 COPY inz-demo/inz-demo /irma_keyshare_server/src/main/resources/irma_configuration/inz-demo
 RUN git clone https://github.com/privacybydesign/irma-demo-schememanager /irma_keyshare_server/src/main/resources/irma_configuration/irma-demo
 
-CMD ["./gradlew", "appRun", "--no-daemon", "--no-parallel"]
+CMD ["./gradlew", "appRun", "--no-daemon", "--info", "--no-parallel"]

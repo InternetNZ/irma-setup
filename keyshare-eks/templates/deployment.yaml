@@ -4,6 +4,7 @@ metadata:
   name: {{ include "keyshare.fullname" . }}
   labels:
     {{- include "keyshare.labels" . | nindent 4 }}
+    app: keyshare
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
