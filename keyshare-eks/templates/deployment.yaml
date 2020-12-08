@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "irmago.fullname" . }}
+  name: {{ include "keyshare.fullname" . }}
   labels:
-    {{- include "irmago.labels" . | nindent 4 }}
+    {{- include "keyshare.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "irmago.selectorLabels" . | nindent 6 }}
+      {{- include "keyshare.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -18,13 +18,13 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "irmago.selectorLabels" . | nindent 8 }}
+        {{- include "keyshare.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "irmago.serviceAccountName" . }}
+      serviceAccountName: {{ include "keyshare.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -33,27 +33,9 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          env:
-            - name: IRMASERVER_NO_TLS
-              value: "true"
-            - name: IRMASERVER_NO_AUTH
-              value: "false"
-            - name: IRMASERVER_PRODUCTION
-              value: "false"
-            - name: IRMASERVER_SCHEMES_PATH
-              value: "/irma/schemes"
-            - name: IRMASERVER_VERBOSE
-              value: "0"
-            # we need to figure out how to insert dynamic value here
-            - name: IRMASERVER_URL
-              value: "http://ad90cf72ccbf34c8d8d1ef121d514ba2-1455555229.ap-southeast-2.elb.amazonaws.com:8088"
-            - name: SCHEME_SITE_WAIT_URL
-              value: "google.com:80"
-            - name: IRMASERVER_REQUESTORS
-              value: '{"fake":{"auth_method":"token","key":"secret-fake-token","disclose_perms":["*"],"issue_perms":["*"],"sign_perms":["*"]},"keyshare_server":{"auth_method":"publickey","key_file":"/irma/jwtkeys/pk.pem"},"site":{"auth_method":"publickey","key_file":"/irma/jwtkeys/pk.pem"}}'
           ports:
             - name: http
-              containerPort: 8088
+              containerPort: 8080
               protocol: TCP
           livenessProbe:
             httpGet:

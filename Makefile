@@ -40,3 +40,6 @@ build-demoui:
 
 build-irmago:
 	docker build -f Dockerfile.irmago.Dockerfile ../ -t $$IRMAGO_IMAGE_REPOSITORY:$$IRMAGO_IMAGE_TAG
+
+build-keyshare:
+	docker build -f Dockerfile.keyshare.Dockerfile ../ -t $$KEYSHARE_IMAGE_REPOSITORY:$$KEYSHARE_IMAGE_TAG
