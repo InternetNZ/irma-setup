@@ -34,7 +34,7 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - name: http
+            - name: mysql
               containerPort: 3306
               protocol: TCP
           resources:
@@ -57,7 +57,7 @@ spec:
       volumes:
         - name: mysql-data
           persistentVolumeClaim:
-            claimName: mysql-data-disk
+            claimName: mysql-data-claim
         - name: mysql-initdb
           configMap:
             name: {{ .Release.Name }}-db-init-configmap

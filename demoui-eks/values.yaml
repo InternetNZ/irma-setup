@@ -6,7 +6,7 @@ replicaCount: 2
 
 image:
   repository: rafaelbernard/demoui
-  tag: 0.2.4
+  tag: 0.2.5
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -34,7 +34,6 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  #type: ClusterIP
   type: LoadBalancer
   port: 80
   targetPort: 80
