@@ -1,5 +1,6 @@
 FROM nginx:1.19.1-alpine
 
-COPY . /usr/share/nginx/html
+# context: ../irma-demo-ui/
+COPY src/ /usr/share/nginx/html
 
 EXPOSE 80

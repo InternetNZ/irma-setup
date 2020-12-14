@@ -31,3 +31,15 @@ irmago-sign-scheme:		## Use irma-cli container to sign and verify our inz scheme
 
 rmi-all:
 	docker-compose -f docker-compose.yml down --remove-orphans --rmi=local
+
+# TODO: move to readme
+# export IMAGE_REPOSITORY and IMAGE_TAG to deploy
+# `export IMAGE_REPOSITORY=internetnzhub/demoui` | `export IMAGE_TAG=0.1.0`
+build-demoui:
+	docker build --rm -f Dockerfile.demoui.Dockerfile ../irma-demo-ui/ -t $$DEMOUI_REPOSITORY:$$DEMOUI_TAG
+
+build-irmago:
+	docker build -f Dockerfile.irmago.Dockerfile ../ -t $$IRMAGO_IMAGE_REPOSITORY:$$IRMAGO_IMAGE_TAG
+
+build-keyshare:
+	docker build -f Dockerfile.keyshare.Dockerfile ../ -t $$KEYSHARE_IMAGE_REPOSITORY:$$KEYSHARE_IMAGE_TAG
