@@ -115,7 +115,7 @@ services:
       context: ../irma-demo-ui
       dockerfile: ../irma-setup/Dockerfile.demoui.Dockerfile
     volumes:
-      - ../irma-demo-ui/:/usr/share/nginx/html
+      - ../irma-demo-ui/src:/usr/share/nginx/html
     environment:
       - VIRTUAL_HOST=irma-demoui.local.internetnz.nz
       - VIRTUAL_PORT=80
