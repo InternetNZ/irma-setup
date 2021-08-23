@@ -12,7 +12,10 @@ up:
 
 up-build:
 	docker-compose -f docker-compose.yml up --build --remove-orphans -d
-         
+
+up-build-nd:	## Get non-detached containers up with build
+	docker-compose -f docker-compose.yml up --build --remove-orphans
+
 up-nd:
 	docker-compose -f docker-compose.yml up --remove-orphans
 
