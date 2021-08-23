@@ -1,9 +1,12 @@
 FROM golang:1.14-alpine as irmago
 
+ARG VERSION='v0.7.0'
+
 RUN apk add --no-cache bash git
 
 RUN git clone https://github.com/privacybydesign/irmago \
     && cd irmago \
+    && git checkout $VERSION \
     && go install ./irma \
     && cd ../ \
     && rm -rf irmago
