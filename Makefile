@@ -19,6 +19,15 @@ up-build-nd:	## Get non-detached containers up with build
 up-nd:
 	docker-compose -f docker-compose.yml up --remove-orphans
 
+irmago-up-build:
+	docker-compose -f docker-compose.yml up --build --remove-orphans -d irmago
+
+irmago-up-build-nd:	## Get non-detached containers up with build
+	docker-compose -f docker-compose.yml up --build --remove-orphans irmago
+
+irmago-up-nd:
+	docker-compose -f docker-compose.yml up --remove-orphans irmago
+
 irmago-bash:	## Exec bash into a running container
 	docker-compose -f docker-compose.yml exec -u $$UID:$$GID --rm irmago bash
 
