@@ -32,6 +32,7 @@ To setup a requestor in irmago server to accept a token, the config should be li
 ```
 
 ### publickey
+
 To setup irmago server to accept JWT sign messages instead of token, the requester has to be set
 to `publickey`:
 
